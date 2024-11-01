@@ -2,6 +2,7 @@
 import { deleteUser, getAllUsers } from '../lib/crud';
 import { users as userSchema } from '../db/schema';
 import type { InferSelectModel } from 'drizzle-orm';
+import MainLayout from '../components/MainLayout.astro';
 
 type User = InferSelectModel<typeof userSchema>;
 
@@ -36,12 +37,7 @@ try {
 }
 ---
 
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Delete User</title>
-</head>
-<body>
+<MainLayout>
   <h1>Delete User</h1>
   
   {errorMessage && (
@@ -86,5 +82,4 @@ try {
       ))}
     </tbody>
   </table>
-</body>
-</html>
+</MainLayout>

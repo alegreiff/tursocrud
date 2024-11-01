@@ -1,16 +1,15 @@
 ---
+import MainLayout from '../components/MainLayout.astro';
 import { getAllUsers } from '../lib/crud';
 
 const users = await getAllUsers();
 ---
+<MainLayout>
 
-<html>
-  <body>
-    <h1>Users</h1>
+    <h1>Usuarios</h1>
     <ul>
       {users.map(user => (
         <li>{user.name} - {user.email}</li>
       ))}
     </ul>
-  </body>
-</html>
+	</MainLayout>

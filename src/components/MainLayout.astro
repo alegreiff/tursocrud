@@ -1,0 +1,27 @@
+---
+import Navigator from "./Navigator.astro";
+
+
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<body>
+<main class="bg-slate-800 container mx-auto p-8">
+  <Navigator />
+  <slot />
+</main>
+	</body>
+</html>
+<style is:global>
+body {
+  @apply text-slate-100 bg-slate-700;
+   
+}
+</style>
