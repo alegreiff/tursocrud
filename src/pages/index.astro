@@ -7,9 +7,30 @@ const users = await getAllUsers();
 <MainLayout>
 
     <h1>Usuarios</h1>
-    <ul>
+    <table class="table table-zebra bg-slate-400 max-w-md">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>correo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+    
+    
       {users.map(user => (
-        <li>{user.name} - {user.email}</li>
+
+        <tr >
+          <td>{user.name}</td>
+          <td>{user.email}</td>
+          <td><a href={`/update/${user.id}`} class="btn btn-xs">Actualizar</a></td>
+        </tr>
+
+
       ))}
-    </ul>
+        </tbody>
+
+      </table>
+    
 	</MainLayout>

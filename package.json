@@ -9,7 +9,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "db:generate": "drizzle-kit generate:sqlite",
-    "db:migrate": "drizzle-kit migrate:sqlite"
+    "db:migrate": "drizzle-kit migrate:sqlite",
+    "cloud": "astro check && astro build && wrangler pages deploy dist"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
