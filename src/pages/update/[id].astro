@@ -1,0 +1,77 @@
+---
+import { getUserById, updateUser } from '../../lib/crud';
+
+export const prerender = false;
+
+const { id } = Astro.params;
+let user = null;
+let errorMessage = '';
+
+if (!id) {
+  return Astro.redirect('/');
+}
+
+try {
+  user = await getUserById(Number(id));
+
+  if (Astro.request.method === 'POST') {
+    const formData = await Astro.request.formData();
+    const name = formData.get('name')?.toString() || '';
+    const email = formData.get('email')?.toString() || '';
+
+    if (!name || !email) {
+      errorMessage = 'Name and email are required';
+    } else {
+      await updateUser(Number(id), name, email);
+      return Astro.redirect('/');
+    }
+  }
+} catch (error) {
+  errorMessage = 'Failed to fetch or update user: ' + (error instanceof Error ? error.message : 'Unknown error');
+}
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Update User</title>
+</head>
+<body>
+  <h1>Update User</h1>
+  
+  {errorMessage && (
+    <div style="color: red;">{errorMessage}</div>
+  )}
+
+  {user ? (
+    <form method="POST">
+      <div>
+        <label for="name">Name:</label>
+        <input 
+          type="text" 
+          id="name" 
+          name="name" 
+          value={user.name}
+          required 
+          minlength="2" 
+          maxlength="100"
+        />
+      </div>
+      <div>
+        <label for="email">Email:</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          value={user.email}
+          required 
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+        />
+      </div>
+      <button type="submit">Update User</button>
+    </form>
+  ) : (
+    <p>User not found</p>
+  )}
+</body>
+</html>
