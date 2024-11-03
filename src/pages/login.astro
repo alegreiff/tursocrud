@@ -1,0 +1,13 @@
+---
+import FormLogin from "../components/forms/FormLogin.astro";
+import AuthLayout from "../components/AuthLayout.astro";
+
+const email = Astro.cookies.get('email')?.value ?? ''
+
+const rememberMe = !!email; // doble negación, convierte en BOOL
+console.log(email, rememberMe)
+---
+
+<AuthLayout>
+  <FormLogin email={email} rememberMe={rememberMe}/>
+</AuthLayout>

@@ -1,13 +1,14 @@
 ---
 import MainLayout from '../components/MainLayout.astro';
 import { getAllUsers } from '../lib/crud';
+const { isLoggedIn } = Astro.locals
 
 const users = await getAllUsers();
 ---
 <MainLayout>
 
     <h1>Usuarios</h1>
-    <table class="table table-zebra bg-slate-400 max-w-md">
+    <table class="table table-zebra bg-slate-400 max-w-md text-slate-900 font-bold">
       <thead>
         <tr>
           <th>Nombre</th>
@@ -24,7 +25,14 @@ const users = await getAllUsers();
         <tr >
           <td>{user.name}</td>
           <td>{user.email}</td>
-          <td><a href={`/update/${user.id}`} class="btn btn-xs">Actualizar</a></td>
+          <td>
+
+            { isLoggedIn ? (
+              <a href={`/update/${user.id}`} class="btn btn-xs">Actualizar</a>
+            ) : (
+              <span>NO AUTH</span>
+            ) }
+          </td>
         </tr>
 
 

@@ -1,13 +1,39 @@
-<div class="navbar bg-stone-950">
+---
+const { isLoggedIn } = Astro.locals
+
+---
+<div class="navbar bg-stone-950/20">
   <div class="flex-1">
-    <a class="btn btn-ghost text-xl">daisyUI</a>
+    <a class="btn btn-ghost text-xl">CRUD Astro Turso</a>
   </div>
   <div class="flex-none">
     <ul class="menu menu-horizontal px-1">
       <li><a href="/">Inicio</a></li>
+      { !isLoggedIn ? (
+      
+      <li><a href="/login">Ingreso</a></li>
+      <li><a href="/register">Registro</a></li>
+      ): (
+      
       <li><a href="/create">Nuevo</a></li>
       <li><a href="/delete">Borrar</a></li>
       
+      <li><a href="/protected">Perfil</a></li>
+      <li id="logout"><a href="#">Salir</a></li>
+      ) }
     </ul>
   </div>
 </div>
+<script>
+import { actions } from "astro:actions"
+
+
+
+  const logoutElement = document.querySelector("#logout") as HTMLLIElement
+  
+  logoutElement?.addEventListener("click", async () => {
+    await actions.logout()
+    window.location.href = "/"
+    
+  })
+</script>

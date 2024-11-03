@@ -20,6 +20,8 @@
     "astro": "^4.16.8",
     "drizzle-kit": "^0.27.0",
     "drizzle-orm": "^0.36.0",
+    "firebase": "^11.0.1",
+    "sweetalert2": "^11.14.4",
     "tailwindcss": "^3.4.14",
     "typescript": "^5.6.3"
   },
